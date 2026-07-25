@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sdeveandteam | Portfolio</title>
+<style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
+  body {
+    background: #0a0a0a;
+    color: white;
+    overflow-x: hidden;
+  }
+  /* Background bola dunia */
+  #globe {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    opacity:0.15;
+    z-index:-1;
+  }
+ .container {
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+    backdrop-filter: blur(5px);
+  }
+  /* Animasi ketikan */
+ .typing {
+    font-size:2.5em;
+    font-weight:bold;
+    border-right:3px solid #00ff88;
+    white-space:nowrap;
+    overflow:hidden;
+    animation: blink 0.7s infinite;
+  }
+  @keyframes blink {50%{border-color:transparent}}
+  /* Card Project */
+ .projects {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap:20px;
+    width:100%;
+    max-width:1000px;
+    margin-top:50px;
+  }
+ .card {
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:20px;
+    border-radius:15px;
+    transition:0.3s;
+    cursor:pointer;
+  }
+ .card:hover {
+    transform: translateY(-5px);
+    background: rgba(0,255,136,0.1);
+    border-color:#00ff88;
+  }
+  /* Teks berjalan */
+ .marquee {
+    width:100%;
+    overflow:hidden;
+    margin-top:50px;
+    background: rgba(255,255,255,0.05);
+    padding:10px 0;
+  }
+ .marquee span {
+    display:inline-block;
+    white-space:nowrap;
+    animation: scroll 15s linear infinite;
+  }
+  @keyframes scroll {
+    from {transform: translateX(100%);}
+    to {transform: translateX(-100%);}
+  }
+  /* Skill bar */
+ .skills {width:100%; max-width:600px; margin-top:30px;}
+ .skill {margin-bottom:15px;}
+ .bar {
+    background: rgba(255,255,255,0.1);
+    border-radius:10px;
+    height:10px;
+    overflow:hidden;
+  }
+ .fill {
+    height:100%;
+    background: linear-gradient(90deg, #00ff88, #00ccff);
+    width:0;
+    animation: fill 2s forwards;
+  }
+</style>
+</head>
+<body>
+<canvas id="globe"></canvas>
+
+<div class="container">
+  <div class="typing" id="typing"></div>
+  <p style="opacity:0.7; margin-top:10px;">Sdeveandteam | Security & Development</p>
+
+  <h2 style="margin-top:60px;">My Projects</h2>
+  <div class="projects" id="projects"></div>
+
+  <div class="marquee">
+    <span>Python 90% • JavaScript 80% • Go 70% • Rust 60% • Bash 85% • BurpSuite • Web Security • Fuzzer • AI Scanner • </span>
+  </div>
+
+  <h2 style="margin-top:40px;">Skills</h2>
+  <div class="skills">
+    <div class="skill"><p>Python</p><div class="bar"><div class="fill" style="width:90%"></div></div></div>
+    <div class="skill"><p>JavaScript</p><div class="bar"><div class="fill" style="width:80%"></div></div></div>
+    <div class="skill"><p>Go</p><div class="bar"><div class="fill" style="width:70%"></div></div></div>
+    <div class="skill"><p>Rust</p><div class="bar"><div class="fill" style="width:60%"></div></div></div>
+    <div class="skill"><p>Web Security</p><div class="bar"><div class="fill" style="width:85%"></div></div></div>
+  </div>
+</div>
+
+<script>
+/* 1. ANIMASI KETIKAN */
+const texts = ["Sdeveandteam", "Security Researcher", "Developer", "Bug Hunter"];
+let i=0, j=0, del=false;
+function type(){
+  document.getElementById('typing').innerHTML = texts[i].substring(0,j);
+  if(!del && j++ == texts[i].length){del=true; setTimeout(type,1500); return;}
+  if(del && j-- == 0){del=false; i=(i+1)%texts.length;}
+  setTimeout(type, del?80:120);
+}
+type();
+
+/* 2. AMBIL REPO DARI GITHUB LU OTOMATIS */
+fetch('https://api.github.com/users/Sdeveandteam/repos')
+.then(res=>res.json())
+.then(data=>{
+  const wrap = document.getElementById('projects');
+  data.slice(0,9).forEach(repo=>{
+    wrap.innerHTML += `
+      <div class="card" onclick="window.open('${repo.html_url}')">
+        <h3>${repo.name}</h3>
+        <p style="opacity:0.7; font-size:0.9em">${repo.description || 'No description'}</p>
+      </div>
+    `
+  })
+})
+
+/* 3. BOLA DUNIA PUTER2 SIMPLE */
+const canvas = document.getElementById('globe');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let angle = 0;
+function drawGlobe(){
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  ctx.strokeStyle = "rgba(0,255,136,0.3)";
+  for(let i=0;i<20;i++){
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, 100+i*10, angle+i, angle+i+1);
+    ctx.stroke();
+  }
+  angle += 0.01;
+  requestAnimationFrame(drawGlobe);
+}
+drawGlobe();
+</script>
+</body>
+  </html>

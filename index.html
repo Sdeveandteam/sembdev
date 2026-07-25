@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sdeveandteam | Portfolio</title>
+<title>Sdeveandteam | Freelance Dev & Security</title>
+
+<!-- FAVICON + PREVIEW WA/FB -->
+<link rel="icon" href="https://sembdev.my.id/favicon.png" type="image/png">
+<meta property="og:title" content="Sdeveandteam | Freelance Dev & Security">
+<meta property="og:description" content="Freelance Developer, Security Researcher & Bug Hunter. Jasa pembuatan website, aplikasi, dan audit keamanan.">
+<meta property="og:image" content="https://sembdev.my.id/preview.jpg">
+<meta property="og:url" content="https://sembdev.my.id">
+<meta property="og:type" content="website">
+
 <style>
     * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', sans-serif;}
   body {
@@ -19,7 +28,7 @@
     opacity:0.15;
     z-index:-1;
   }
- .container {
+.container {
     min-height:100vh;
     display:flex;
     flex-direction:column;
@@ -29,7 +38,7 @@
     backdrop-filter: blur(5px);
   }
   /* Animasi ketikan */
- .typing {
+.typing {
     font-size:2.5em;
     font-weight:bold;
     border-right:3px solid #00ff88;
@@ -39,7 +48,7 @@
   }
   @keyframes blink {50%{border-color:transparent}}
   /* Card Project */
- .projects {
+.projects {
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap:20px;
@@ -47,7 +56,7 @@
     max-width:1000px;
     margin-top:50px;
   }
- .card {
+.card {
     background: rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.1);
     padding:20px;
@@ -55,20 +64,20 @@
     transition:0.3s;
     cursor:pointer;
   }
- .card:hover {
+.card:hover {
     transform: translateY(-5px);
     background: rgba(0,255,136,0.1);
     border-color:#00ff88;
   }
   /* Teks berjalan */
- .marquee {
+.marquee {
     width:100%;
     overflow:hidden;
     margin-top:50px;
     background: rgba(255,255,255,0.05);
     padding:10px 0;
   }
- .marquee span {
+.marquee span {
     display:inline-block;
     white-space:nowrap;
     animation: scroll 15s linear infinite;
@@ -78,15 +87,15 @@
     to {transform: translateX(-100%);}
   }
   /* Skill bar */
- .skills {width:100%; max-width:600px; margin-top:30px;}
- .skill {margin-bottom:15px;}
- .bar {
+.skills {width:100%; max-width:600px; margin-top:30px;}
+.skill {margin-bottom:15px;}
+.bar {
     background: rgba(255,255,255,0.1);
     border-radius:10px;
     height:10px;
     overflow:hidden;
   }
- .fill {
+.fill {
     height:100%;
     background: linear-gradient(90deg, #00ff88, #00ccff);
     width:0;
@@ -99,13 +108,13 @@
 
 <div class="container">
   <div class="typing" id="typing"></div>
-  <p style="opacity:0.7; margin-top:10px;">Sdeveandteam | Security & Development</p>
+  <p style="opacity:0.7; margin-top:10px;">Sdeveandteam | Freelance Dev & Security</p>
 
   <h2 style="margin-top:60px;">My Projects</h2>
   <div class="projects" id="projects"></div>
 
   <div class="marquee">
-    <span>Python 90% • JavaScript 80% • Go 70% • Rust 60% • Bash 85% • BurpSuite • Web Security • Fuzzer • AI Scanner • </span>
+    <span>Freelance Web Dev • Python 90% • JavaScript 80% • Go 70% • Rust 60% • Bash 85% • BurpSuite • Web Security • Fuzzer • AI Scanner • </span>
   </div>
 
   <h2 style="margin-top:40px;">Skills</h2>
@@ -119,8 +128,8 @@
 </div>
 
 <script>
-/* 1. ANIMASI KETIKAN */
-const texts = ["Sdeveandteam", "Security Researcher", "Developer", "Bug Hunter"];
+/* 1. ANIMASI KETIKAN - UDAH GUE TAMBAH FREELANCE DEV */
+const texts = ["Sdeveandteam", "Freelance Developer", "Security Researcher", "Bug Hunter"];
 let i=0, j=0, del=false;
 function type(){
   document.getElementById('typing').innerHTML = texts[i].substring(0,j);
@@ -165,4 +174,4 @@ function drawGlobe(){
 drawGlobe();
 </script>
 </body>
-  </html>
+   </html>

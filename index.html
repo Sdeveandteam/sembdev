@@ -21,7 +21,7 @@
     overflow-x: hidden;
   }
   
-  /* Canvas Globe */
+  /* Canvas Globe Background */
   #globe {
     position: fixed;
     top:0; left:0;
@@ -39,10 +39,31 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding:40px 20px 20px 20px;
+    padding:30px 15px;
   }
 
-  /* Header Section & Deskripsi Singkat */
+  /* Status Badge Available */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    color: #00ff88;
+    margin-bottom: 15px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff88;
+  }
+
+  /* Header Section */
   .header-box {
     text-align: center;
     max-width: 650px;
@@ -50,11 +71,11 @@
   }
 
   .typing {
-    font-size:2.5em;
-    font-weight:bold;
-    border-right:3px solid #00ff88;
-    white-space:nowrap;
-    overflow:hidden;
+    font-size: 2em;
+    font-weight: bold;
+    border-right: 3px solid #00ff88;
+    white-space: nowrap;
+    overflow: hidden;
     animation: blink 0.7s infinite;
     text-shadow: 0 0 10px rgba(0,255,136,0.5);
     display: inline-block;
@@ -63,70 +84,105 @@
 
   .subtitle {
     color: #00ff88;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: 600;
     margin-top: 10px;
     letter-spacing: 1px;
   }
 
   .bio {
-    opacity: 0.8;
+    opacity: 0.85;
     margin-top: 15px;
-    font-size: 0.95em;
-    line-height: 1.6;
-    background: rgba(15, 23, 20, 0.4);
-    backdrop-filter: blur(5px);
-    padding: 15px 20px;
+    font-size: 0.9em;
+    line-height: 1.5;
+    background: rgba(15, 23, 20, 0.45);
+    backdrop-filter: blur(8px);
+    padding: 15px;
     border-radius: 12px;
     border: 1px solid rgba(0, 255, 136, 0.15);
   }
 
-  /* Card Project (Layout 2 Kolom Kiri - Kanan) */
-  .projects {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  h2.section-title {
+    margin-top: 45px;
+    font-size: 1.5em;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+    text-align: center;
+  }
+
+  /* Services Grid */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
     width: 100%;
     max-width: 900px;
-    margin-top: 25px;
+    margin-top: 20px;
+  }
+  .service-card {
+    background: rgba(15, 23, 20, 0.45);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0, 255, 136, 0.15);
+    padding: 15px;
+    border-radius: 12px;
+  }
+  .service-card h4 {
+    color: #00ff88;
+    margin-bottom: 5px;
+  }
+  .service-card p {
+    font-size: 0.8em;
+    opacity: 0.75;
+  }
+
+  /* Card Project (FORCE 2 KOLOM KIRI-KANAN DI SEMUA LAYAR) */
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
   }
 
   .card {
-    flex: 1 1 calc(50% - 10px); /* Membagi 2 Kolom Kiri Kanan */
-    box-sizing: border-box;
     background: rgba(15, 23, 20, 0.45);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 255, 136, 0.15);
-    padding:20px;
-    border-radius:15px;
+    padding: 15px;
+    border-radius: 12px;
     transition: all 0.3s ease;
-    cursor:pointer;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   }
 
-  /* Tampilan 1 Kolom Khusus Layar HP Tegak */
-  @media (max-width: 650px) {
-    .card {
-      flex: 1 1 100%;
-    }
+  .card h3 {
+    font-size: 1.05em;
+    word-break: break-word;
+  }
+
+  .card p {
+    font-size: 0.8em;
+    opacity: 0.75;
+    margin-top: 6px;
+    line-height: 1.3;
   }
 
   .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     background: rgba(0, 255, 136, 0.12);
     border-color:#00ff88;
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
   }
 
   /* Teks berjalan */
   .marquee {
     width:100%;
     overflow:hidden;
-    margin-top:50px;
+    margin-top:40px;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(5px);
     border-top: 1px solid rgba(255,255,255,0.05);
@@ -137,6 +193,7 @@
     display:inline-block;
     white-space:nowrap;
     animation: scroll 15s linear infinite;
+    font-size: 0.9em;
   }
   @keyframes scroll {
     from {transform: translateX(100%);}
@@ -147,33 +204,26 @@
   .skills {
     width:100%; 
     max-width:600px; 
-    margin-top:30px;
+    margin-top:20px;
     background: rgba(15, 23, 20, 0.35);
     backdrop-filter: blur(8px);
-    padding: 25px;
+    padding: 20px;
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
-  .skill {
-    margin-bottom:15px;
-  }
-  .skill:last-child {
-    margin-bottom: 0;
-  }
+  .skill { margin-bottom:12px; }
+  .skill:last-child { margin-bottom: 0; }
   .skill-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
-    font-size: 0.95em;
+    font-size: 0.9em;
   }
-  .skill-header span.percent {
-    color: #00ff88;
-    font-weight: bold;
-  }
+  .skill-header span.percent { color: #00ff88; font-weight: bold; }
   .bar {
     background: rgba(255,255,255,0.1);
     border-radius:10px;
-    height:10px;
+    height:8px;
     overflow:hidden;
   }
   .fill {
@@ -183,12 +233,89 @@
     animation: fill 2s forwards;
   }
 
-  /* Footer Copyright */
+  /* FAQ Accordion Section */
+  .faq-container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+  }
+  .faq-item {
+    background: rgba(15, 23, 20, 0.45);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 12px 15px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #00ff88;
+  }
+  .faq-answer {
+    padding: 0 15px 12px 15px;
+    font-size: 0.85em;
+    opacity: 0.8;
+    display: none;
+    line-height: 1.4;
+  }
+
+  /* Contact & Email Section */
+  .contact-section {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    text-align: center;
+    background: rgba(15, 23, 20, 0.45);
+    backdrop-filter: blur(8px);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+  }
+  .btn-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #00ff88;
+    color: #050505;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.85em;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+  }
+  .contact-btn.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .contact-btn:hover {
+    background: #00ccff;
+    color: #050505;
+    box-shadow: 0 0 15px rgba(0, 204, 255, 0.4);
+  }
+
+  /* Footer */
   footer {
-    margin-top: 60px;
+    margin-top: 50px;
     padding: 20px;
     text-align: center;
-    font-size: 0.85em;
+    font-size: 0.8em;
     opacity: 0.6;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     width: 100%;
@@ -200,23 +327,48 @@
 
 <div class="container">
   
-  <!-- HEADER & BIO PERKENALAN -->
+  <!-- BADGE STATUS -->
+  <div class="status-badge">
+    <span class="status-dot"></span> Available for Freelance & Security Projects
+  </div>
+
+  <!-- HEADER & BIO -->
   <div class="header-box">
     <div class="typing" id="typing"></div>
     <div class="subtitle">Freelance Developer & Security Researcher</div>
     <p class="bio">
-      Fokus dalam pengembangan sistem web modern, otomatisasi script, serta pengujian keamanan jaringan dan aplikasi (penetration testing). Siap membantu pembuatan sistem kustom maupun audit celah keamanan secara profesional.
+      Spesialis dalam pengembangan aplikasi web modern, script otomatisasi, serta audit celah keamanan (penetration testing). Berkomitmen menghadirkan kode yang bersih, efisien, dan aman dari celah eksploitasi.
     </p>
   </div>
 
-  <h2 style="margin-top:40px;">My Projects</h2>
+  <!-- LAYANAN / SERVICES -->
+  <h2 class="section-title">What I Do</h2>
+  <div class="services">
+    <div class="service-card">
+      <h4>Web Development</h4>
+      <p>Pembuatan website kustom, landing page, dan API backend yang cepat & responsive.</p>
+    </div>
+    <div class="service-card">
+      <h4>Security Audit</h4>
+      <p>Pengujian celah keamanan (Vulnerability Assessment & Pentest) aplikasi web.</p>
+    </div>
+    <div class="service-card">
+      <h4>Automation / Tools</h4>
+      <p>Pembuatan bot, fuzzer, custom script Python/Go/Bash untuk otomatisasi tugas.</p>
+    </div>
+  </div>
+
+  <!-- PROJECTS (FORCE 2 KOLOM) -->
+  <h2 class="section-title">My Projects</h2>
   <div class="projects" id="projects"></div>
 
+  <!-- MARQUEE TEKS BERJALAN -->
   <div class="marquee">
     <span>Freelance Web Dev • Python 90% • JavaScript 80% • Go 70% • Rust 60% • Bash 85% • BurpSuite • Web Security • Fuzzer • AI Scanner • </span>
   </div>
 
-  <h2 style="margin-top:40px;">Skills</h2>
+  <!-- SKILLS -->
+  <h2 class="section-title">Skills & Tech Stack</h2>
   <div class="skills">
     <div class="skill">
       <div class="skill-header"><span>Python</span><span class="percent">90%</span></div>
@@ -240,6 +392,55 @@
     </div>
   </div>
 
+  <!-- FAQ SECTION -->
+  <h2 class="section-title">Frequently Asked Questions</h2>
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Berapa lama estimasi pengerjaan project?</span> <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Waktu pengerjaan bervariasi tergantung kompleksitas. Untuk landing page/script otomatisasi biasanya 2-5 hari, sedangkan audit keamanan dan sistem web penuh membutuhkan 1-2 minggu.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Apakah menyediakan garansi perbaikan bug?</span> <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Ya, setiap pembuatan website atau script mendapat garansi maintenance & bug fix gratis selama 30 hari setelah project diserahterimakan.
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Sistem pembayaran seperti apa?</span> <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Sistem pembayaran fleksibel menggunakan DP (Down Payment) 50% di awal dan pelunasan 50% setelah project selesai diuji dan siap di-deploy.
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT & EMAIL SECTION -->
+  <h2 class="section-title">Get In Touch</h2>
+  <div class="contact-section">
+    <p style="font-size:0.9em; opacity:0.8; margin-bottom:5px;">
+      Punya project menarik atau butuh konsultasi keamanan web? Hubungi saya di:
+    </p>
+    <p style="color:#00ff88; font-weight:bold; font-size:1.05em; margin-bottom:12px;">
+      sembsui@gmail.com
+    </p>
+    <div class="btn-group">
+      <a href="mailto:sembsui@gmail.com" class="contact-btn">
+        📩 Send Email
+      </a>
+      <button class="contact-btn secondary" onclick="copyEmail()">
+        📋 <span id="email-text">Copy Email</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
     &copy; <span id="year"></span> Sdeveandteam. All rights reserved.
   </footer>
@@ -257,13 +458,12 @@ function type(){
 }
 type();
 
-/* 2. AMBIL REPO DARI GITHUB AUTOMATIS (FILTER KAI DAN FORK) */
+/* 2. AMBIL REPO DARI GITHUB (FILTER KAI DAN FORK) */
 fetch('https://api.github.com/users/Sdeveandteam/repos?sort=updated')
 .then(res=>res.json())
 .then(data=>{
   const wrap = document.getElementById('projects');
   
-  // Filter: Bukan repo fork DAN nama repo tidak mengandung kata "kai"
   const filteredRepos = data.filter(repo => {
     return !repo.fork && !repo.name.toLowerCase().includes('kai');
   }).slice(0, 10);
@@ -272,16 +472,35 @@ fetch('https://api.github.com/users/Sdeveandteam/repos?sort=updated')
     wrap.innerHTML += `
       <div class="card" onclick="window.open('${repo.html_url}', '_blank')">
         <h3 style="color:#00ff88;">${repo.name}</h3>
-        <p style="opacity:0.75; font-size:0.9em; margin-top:8px;">${repo.description || 'No description'}</p>
+        <p>${repo.description || 'No description available'}</p>
       </div>
     `
   })
 });
 
-/* 3. SET TAHUN COPYRIGHT */
+/* 3. FAQ TOGGLE INTERAKTIF */
+function toggleFaq(element) {
+  const answer = element.nextElementSibling;
+  const isVisible = answer.style.display === "block";
+  answer.style.display = isVisible ? "none" : "block";
+  element.querySelector("span:last-child").textContent = isVisible ? "+" : "-";
+}
+
+/* 4. COPY EMAIL TO CLIPBOARD */
+function copyEmail() {
+  const email = "sembsui@gmail.com";
+  navigator.clipboard.writeText(email);
+  const btnText = document.getElementById("email-text");
+  btnText.textContent = "Copied!";
+  setTimeout(() => {
+    btnText.textContent = "Copy Email";
+  }, 3000);
+}
+
+/* 5. SET TAHUN COPYRIGHT */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* 4. ANIMASI BOLA DUNIA 3D DIGITAL */
+/* 6. BOLA DUNIA 3D */
 const canvas = document.getElementById('globe');
 const ctx = canvas.getContext('2d');
 
@@ -302,7 +521,7 @@ function drawGlobe3D() {
   
   ctx.lineWidth = 1.2;
 
-  // Garis Lintang (Latitude)
+  // Garis Lintang
   for (let lat = -60; lat <= 60; lat += 20) {
     const radLat = (lat * Math.PI) / 180;
     const rLat = radius * Math.cos(radLat);
@@ -314,7 +533,7 @@ function drawGlobe3D() {
     ctx.stroke();
   }
 
-  // Garis Bujur Berputar (Longitude)
+  // Garis Bujur Berputar
   const count = 12;
   for (let i = 0; i < count; i++) {
     const angle = rotation + (i * Math.PI) / count;

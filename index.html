@@ -59,7 +59,7 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding: 80px 15px 30px 15px; /* Diberi padding-top lebih besar agar tulisan agak ke bawah */
+    padding: 80px 15px 30px 15px;
   }
 
   /* Status Badge Available */
@@ -141,14 +141,18 @@
     border: 1px solid rgba(0, 255, 136, 0.15);
   }
 
-  /* AGENT SECTION STYLES */
+  /* AGENT & BLOG SECTION STYLES */
   .agent-box {
     margin-top: 15px;
     width: 100%;
     max-width: 650px;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
-  .agent-btn {
+  .agent-btn, .blog-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -160,9 +164,10 @@
     font-size: 0.88em;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.3s ease;
   }
-  .agent-btn:hover {
+  .agent-btn:hover, .blog-btn:hover {
     background: #00ff88;
     color: #050505;
     box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
@@ -170,6 +175,7 @@
   .agent-output {
     display: none;
     margin-top: 12px;
+    width: 100%;
     text-align: left;
     background: rgba(5, 15, 10, 0.85);
     border: 1px solid rgba(0, 255, 136, 0.3);
@@ -418,11 +424,14 @@
       Membantu mengembangkan sistem web yang cepat, scalable, serta aman dari ancaman peretasan. Berfokus pada penulisan kode berstandar tinggi, otomatisasi efisien, dan pengujian celah keamanan komprehensif.
     </p>
 
-    <!-- FITUR AGEN INTERAKTIF -->
+    <!-- FITUR AGEN & TOMBOL BLOG -->
     <div class="agent-box">
       <button class="agent-btn" onclick="triggerAgent()">
-        🤖 Ask Agent (Voice & Briefing)
+        🤖 Ask Agent (Voice)
       </button>
+      <a href="blog/" class="blog-btn">
+        📖 Blog & Write-ups
+      </a>
       <div class="agent-output" id="agent-output"></div>
     </div>
   </div>

@@ -31,6 +31,26 @@
     pointer-events: none;
   }
 
+  /* Contact Top Corner */
+  .top-faq-email {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 10;
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(15, 23, 20, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+  }
+  .top-faq-email a {
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
   .container {
     position: relative;
     z-index: 1;
@@ -39,7 +59,7 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding:30px 15px;
+    padding: 80px 15px 30px 15px; /* Diberi padding-top lebih besar agar tulisan agak ke bawah */
   }
 
   /* Status Badge Available */
@@ -55,12 +75,29 @@
     color: #00ff88;
     margin-bottom: 15px;
   }
+
+  /* Icon Ijo Kedip-Kedip (Pulse Animation) */
   .status-dot {
     width: 8px;
     height: 8px;
     background: #00ff88;
     border-radius: 50%;
     box-shadow: 0 0 8px #00ff88;
+    animation: pulse-green 1.8s infinite;
+  }
+  @keyframes pulse-green {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+    }
+    70% {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 8px rgba(0, 255, 136, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+    }
   }
 
   /* Header Section */
@@ -104,6 +141,47 @@
     border: 1px solid rgba(0, 255, 136, 0.15);
   }
 
+  /* AGENT SECTION STYLES */
+  .agent-box {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+  }
+  .agent-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 255, 136, 0.15);
+    border: 1px solid #00ff88;
+    color: #00ff88;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.88em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .agent-btn:hover {
+    background: #00ff88;
+    color: #050505;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  }
+  .agent-output {
+    display: none;
+    margin-top: 12px;
+    text-align: left;
+    background: rgba(5, 15, 10, 0.85);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 15px;
+    border-radius: 10px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.82em;
+    color: #00ff88;
+    line-height: 1.5;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+  }
+
   h2.section-title {
     margin-top: 40px;
     font-size: 1.3em;
@@ -137,7 +215,7 @@
     line-height: 1.4;
   }
 
-  /* Card Project (2 KOLOM KIRI-KANAN) */
+  /* Card Project */
   .projects {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -320,6 +398,11 @@
 <body>
 <canvas id="globe"></canvas>
 
+<!-- EMAIL FAQ / CONTACT ATAS -->
+<div class="top-faq-email">
+  FAQ / Contact: <a href="mailto:sembsui@gmail.com">sembsui@gmail.com</a>
+</div>
+
 <div class="container">
   
   <!-- BADGE STATUS -->
@@ -334,6 +417,14 @@
     <p class="bio">
       Membantu mengembangkan sistem web yang cepat, scalable, serta aman dari ancaman peretasan. Berfokus pada penulisan kode berstandar tinggi, otomatisasi efisien, dan pengujian celah keamanan komprehensif.
     </p>
+
+    <!-- FITUR AGEN INTERAKTIF -->
+    <div class="agent-box">
+      <button class="agent-btn" onclick="triggerAgent()">
+        🤖 Ask Agent (Voice & Briefing)
+      </button>
+      <div class="agent-output" id="agent-output"></div>
+    </div>
   </div>
 
   <!-- LAYANAN / SERVICES -->
@@ -434,7 +525,7 @@
 </div>
 
 <script>
-/* 1. ANIMASI KETIKAN */
+/* 1. ANIMASI KETIKAN HEADER */
 const texts = ["Sdeveandteam", "Freelance Dev", "Security Researcher", "Bug Hunter"];
 let i=0, j=0, del=false;
 function type(){
@@ -445,13 +536,15 @@ function type(){
 }
 type();
 
-/* 2. AMBIL REPO DARI GITHUB + MENGISI DESKRIPSI REPO KOSONG AUTOMATIS */
+/* 2. AMBIL REPO DARI GITHUB + REPO LIST BUAT AGEN */
 const customDescriptions = {
   'sembdev': 'Main ecosystem repository for custom backend modules & core web utilities.',
   'supply-chain-attack': 'Proof-of-Concept & research script targeting dependency supply chain vulnerabilities.',
   'sdev-toolkit': 'Collection of internal security auditing tools & pentesting automation scripts.',
   'dos-lab': 'Experimental lab environment for testing application stress & rate-limiting limits.'
 };
+
+let fetchedRepoList = []; // Disimpan untuk dibaca oleh Agen
 
 fetch('https://api.github.com/users/Sdeveandteam/repos?sort=updated')
 .then(res => res.json())
@@ -465,10 +558,12 @@ fetch('https://api.github.com/users/Sdeveandteam/repos?sort=updated')
   
   filteredRepos.forEach(repo => {
     let desc = repo.description;
-    // Pengecekan ketat untuk deskripsi null/kosong/no description
     if (!desc || desc === null || String(desc).trim() === "" || String(desc).toLowerCase().includes("no description")) {
       desc = customDescriptions[repo.name] || 'Security research tool & custom development repository by Sdeveandteam.';
     }
+
+    // Simpan ke array buat dibaca agen nanti
+    fetchedRepoList.push(`${repo.name}: ${desc}`);
 
     wrap.innerHTML += `
       <div class="card" onclick="window.open('${repo.html_url}', '_blank')">
@@ -480,7 +575,53 @@ fetch('https://api.github.com/users/Sdeveandteam/repos?sort=updated')
 })
 .catch(err => console.error(err));
 
-/* 3. FAQ TOGGLE INTERAKTIF */
+/* 3. FITUR AGEN SDEVEANDTEAM (TEXT TYPING & SPEECH) */
+let isAgentSpeaking = false;
+
+function triggerAgent() {
+  const output = document.getElementById('agent-output');
+  output.style.display = 'block';
+  
+  if (isAgentSpeaking) return;
+  isAgentSpeaking = true;
+  output.innerHTML = '<i>[Agent System Initializing...]</i><br><br>';
+
+  // Menyiapkan Teks Penjelasan Agen
+  let reposText = fetchedRepoList.length > 0 
+    ? "Beberapa repository project aktif saat ini adalah: " + fetchedRepoList.join(". ")
+    : "Membuat berbagai tools security audit, otomatisasi script, dan sistem web modern.";
+
+  const fullSpeech = `Halo! Saya adalah sistem Agen Virtual Sdeveandteam. Sdeveandteam adalah Freelance Developer dan Security Researcher. Keahlian utamanya meliputi pengembangan sistem web yang cepat dan aman, audit pengujian penetrasi keamanan web, serta otomatisasi script dengan Python, JavaScript, Go, dan Bash. ${reposText}. Silakan hubungi via email untuk diskusi project!`;
+
+  // --- EFEK KETIK ---
+  let charIdx = 0;
+  function typeWriter() {
+    if (charIdx < fullSpeech.length) {
+      output.innerHTML += fullSpeech.charAt(charIdx);
+      charIdx++;
+      setTimeout(typeWriter, 25);
+    }
+  }
+  typeWriter();
+
+  // --- EFEK SUARA (WEB SPEECH API) ---
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel(); // Stop suara lama
+    const utterance = new SpeechSynthesisUtterance(fullSpeech);
+    utterance.lang = 'id-ID';
+    utterance.rate = 0.95;
+    utterance.pitch = 1.0;
+
+    utterance.onend = () => { isAgentSpeaking = false; };
+    utterance.onerror = () => { isAgentSpeaking = false; };
+
+    speechSynthesis.speak(utterance);
+  } else {
+    isAgentSpeaking = false;
+  }
+}
+
+/* 4. FAQ TOGGLE INTERAKTIF */
 function toggleFaq(element) {
   const answer = element.nextElementSibling;
   const isVisible = answer.style.display === "block";
@@ -488,10 +629,10 @@ function toggleFaq(element) {
   element.querySelector("span:last-child").textContent = isVisible ? "+" : "-";
 }
 
-/* 4. SET TAHUN COPYRIGHT */
+/* 5. SET TAHUN COPYRIGHT */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* 5. BOLA DUNIA 3D (CANVAS) */
+/* 6. BOLA DUNIA 3D (CANVAS) */
 const canvas = document.getElementById('globe');
 const ctx = canvas.getContext('2d');
 

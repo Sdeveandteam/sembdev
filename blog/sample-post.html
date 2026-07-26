@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengenalan SAST & DAST Security Scanner | Sdeveandteam</title>
+<link rel="icon" href="https://sembdev.my.id/favicon.png" type="image/png">
+<style>
+  * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+  body { background: #050505; color: white; padding: 40px 15px; line-height: 1.6; }
+  .container { max-width: 750px; margin: 0 auto; }
+  .nav-back { margin-bottom: 25px; }
+  .nav-back a { color: #00ff88; text-decoration: none; font-size: 0.9em; font-weight: bold; }
+  h1 { color: #00ff88; margin-bottom: 8px; }
+  .meta { font-size: 0.8em; opacity: 0.6; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+  
+  .terminal-box {
+    background: rgba(5, 15, 10, 0.9);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.85em;
+    color: #00ff88;
+    margin: 20px 0;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+  p { font-size: 0.92em; opacity: 0.9; margin-bottom: 15px; }
+  h2 { color: #00ff88; font-size: 1.2em; margin: 25px 0 10px 0; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="nav-back">
+    <a href="index.html">← Kembali ke Daftar Blog</a>
+  </div>
+
+  <h1>Pengenalan SAST & DAST Security Scanner</h1>
+  <div class="meta">Dipublikasikan pada 26 Juli 2026 • Oleh Sdeveandteam</div>
+
+  <p>Dalam dunia pengujian keamanan aplikasi (*AppSec*), ada dua pendekatan utama yang sering digunakan untuk menemukan celah keamanan: <b>SAST (Static Application Security Testing)</b> dan <b>DAST (Dynamic Application Security Testing)</b>.</p>
+
+  <h2>1. Perbedaan SAST dan DAST</h2>
+  <p><b>SAST</b> memeriksa kode sumber dari dalam (White-box) tanpa menjalankan aplikasinya, sedangkan <b>DAST</b> menguji aplikasi yang sedang berjalan dari luar (Black-box) dengan mensimulasikan serangan nyata.</p>
+
+  <h2>2. Contoh Log Output Scanner (Terminal View)</h2>
+  <p>Berikut adalah tampilan log otomatisasi skrip audit yang berjalan pada target:</p>
+
+  <div class="terminal-box">
+$ python3 sdev_scanner.py --target https://example.com
+[+] Initializing Hybrid SAST + DAST Engine...
+[+] Scanning endpoints for SQL Injection & XSS vulnerabilities...
+[!] WARNING: Potential Reflected XSS found on parameter '?q='
+[+] Auto-generating AI Explainer report... Done.
+  </div>
+
+  <p>Dengan menggabungkan analisis kode otomatis dan simulasi respons server, temuan celah keamanan dapat teridentifikasi lebih presisi sebelum sistem di-deploy ke publik.</p>
+</div>
+
+</body>
+</html>

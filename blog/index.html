@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog & Security Research | Sdeveandteam</title>
+  
+  <!-- Open Graph Meta Tags (Untuk Preview WA/Telegram/LinkedIn) -->
+  <meta property="og:title" content="Blog & Security Research - Sdeveandteam">
+  <meta property="og:description" content="Dokumentasi tools cybersecurity, write-up pengujian celah keamanan, dan riset otomatisasi.">
+  <meta property="og:type" content="website">
+
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     body { background: #050505; color: white; padding: 40px 15px; }
@@ -11,7 +17,39 @@
     a.back { color: #00ff88; text-decoration: none; font-size: 0.88em; font-weight: bold; display: inline-block; margin-bottom: 20px; }
     a.back:hover { text-decoration: underline; }
     h1 { color: #00ff88; font-size: 1.8em; margin-bottom: 8px; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
-    .subtitle { font-size: 0.9em; opacity: 0.75; margin-bottom: 30px; line-height: 1.5; }
+    .subtitle { font-size: 0.9em; opacity: 0.75; margin-bottom: 25px; line-height: 1.5; }
+
+    /* Search & Filter Section */
+    .controls { margin-bottom: 25px; display: flex; flex-direction: column; gap: 12px; }
+    .search-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(15, 23, 20, 0.8);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 8px;
+      color: #00ff88;
+      font-size: 0.9em;
+      outline: none;
+    }
+    .search-input:focus { border-color: #00ff88; box-shadow: 0 0 8px rgba(0, 255, 136, 0.3); }
+    
+    .filter-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tag-btn.active, .tag-btn:hover {
+      background: rgba(0, 255, 136, 0.2);
+      border-color: #00ff88;
+      color: #00ff88;
+    }
+
     .blog-grid { display: grid; gap: 16px; }
     .blog-card {
       background: rgba(15, 23, 20, 0.5);
@@ -42,57 +80,69 @@
   <h1>Blog & Security Research</h1>
   <p class="subtitle">Dokumentasi tools, write-up pengujian celah keamanan, dan riset otomatisasi buatan Sdeveandteam.</p>
 
-  <div class="blog-grid">
+  <!-- Filter & Search Bar -->
+  <div class="controls">
+    <input type="text" id="searchInput" class="search-input" placeholder="Cari artikel atau kata kunci (misal: Fuzzing, AI, Bot)..." onkeyup="filterPosts()">
+    <div class="filter-tags">
+      <button class="tag-btn active" onclick="filterCategory('all', this)">Semua</button>
+      <button class="tag-btn" onclick="filterCategory('tools', this)">Tools</button>
+      <button class="tag-btn" onclick="filterCategory('pentest', this)">Pentest</button>
+      <button class="tag-btn" onclick="filterCategory('research', this)">Research</button>
+      <button class="tag-btn" onclick="filterCategory('automation', this)">Automation</button>
+    </div>
+  </div>
 
-    <a href="sast-dast.html" class="blog-card">
+  <div class="blog-grid" id="blogGrid">
+
+    <a href="sast-dast.html" class="blog-card" data-category="tools">
       <div class="tag-date">2026-07-26 • Tool Installation</div>
       <h3>Panduan Install SAST & DAST Security Scanner</h3>
       <p>Panduan instalasi Sdev-Toolkit scanner untuk Termux, Ubuntu, dan Linux CLI...</p>
     </a>
 
-    <a href="burpsuite-ai.html" class="blog-card">
+    <a href="burpsuite-ai.html" class="blog-card" data-category="pentest">
       <div class="tag-date">2026-07-27 • Pentest Write-up</div>
       <h3>BurpSuite AI Scanner: Integrasi LLM</h3>
       <p>Mengintegrasikan AI agent ke dalam BurpSuite untuk analisa vulnerability otomatis...</p>
     </a>
 
-    <a href="fuzzer-go-rust.html" class="blog-card">
+    <a href="fuzzer-go-rust.html" class="blog-card" data-category="research">
       <div class="tag-date">2026-07-27 • Research</div>
       <h3>High-Speed Fuzzing: Go vs Rust Benchmark</h3>
       <p>Komparasi performa dan kecepatan HTTP request fuzzing Go vs Rust...</p>
     </a>
 
-    <a href="go-fuzzer.html" class="blog-card">
+    <a href="go-fuzzer.html" class="blog-card" data-category="tools">
       <div class="tag-date">2026-07-27 • Tool Documentation</div>
       <h3>Go-Fuzzer: Fast Path & Parameter Discovery</h3>
       <p>Tool discovery cepat berbasis Go untuk mencari hidden directory dan endpoint API...</p>
     </a>
 
-    <a href="eviltwin-lite.html" class="blog-card">
+    <a href="eviltwin-lite.html" class="blog-card" data-category="research">
       <div class="tag-date">2026-07-27 • Wireless Security</div>
       <h3>EvilTwin Lite: Wireless Attack Vector PoC</h3>
       <p>Riset keamanan jaringan WiFi, rogue AP, dan analisa captive portal...</p>
     </a>
 
-    <a href="dos-lab.html" class="blog-card">
+    <a href="dos-lab.html" class="blog-card" data-category="research">
       <div class="tag-date">2026-07-27 • Security Lab</div>
       <h3>DoS Lab: Stress Testing & Mitigation Analysis</h3>
       <p>Pengujian ketahanan server web terhadap lonjakan trafik serta evaluasi WAF...</p>
     </a>
 
-    <a href="kai-ticket-bot.html" class="blog-card">
+    <a href="kai-ticket-bot.html" class="blog-card" data-category="automation">
       <div class="tag-date">2026-07-27 • Automation</div>
       <h3>KAI Ticket Automation Bot</h3>
       <p>Script otomasikasi reservasi tiket kereta cepat berbasis Python & Telegram Bot...</p>
     </a>
 
-    <a href="epc-4g.html" class="blog-card">
+    <a href="epc-4g.html" class="blog-card" data-category="research">
       <div class="tag-date">2026-07-27 • Telecom Research</div>
       <h3>Simulasi EPC 4G LTE Network Security</h3>
       <p>Eksplorasi arsitektur core network 4G LTE dan analisis keamanan protokol GTP...</p>
     </a>
 
-    <a href="supply-chain.html" class="blog-card">
+    <a href="supply-chain.html" class="blog-card" data-category="pentest">
       <div class="tag-date">2026-07-27 • Security PoC</div>
       <h3>Anatomi Supply Chain Attack</h3>
       <p>Riset vektor serangan dependency confusion pada package repository...</p>
@@ -100,6 +150,36 @@
 
   </div>
 </div>
+
+<script>
+  let currentCategory = 'all';
+
+  function filterPosts() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let cards = document.querySelectorAll('.blog-card');
+
+    cards.forEach(card => {
+      let text = card.innerText.toLowerCase();
+      let category = card.getAttribute('data-category');
+      
+      let matchesSearch = text.includes(input);
+      let matchesCategory = (currentCategory === 'all' || category === currentCategory);
+
+      if (matchesSearch && matchesCategory) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  function filterCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterPosts();
+  }
+</script>
 
 </body>
 </html>

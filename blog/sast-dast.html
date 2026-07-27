@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panduan Instalasi SAST & DAST Scanner | Sdeveandteam</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #050505; color: #e0e0e0; padding: 30px 15px; line-height: 1.6; }
+    .container { max-width: 750px; margin: 0 auto; }
+    
+    a.back { color: #00ff88; text-decoration: none; font-size: 0.9em; display: inline-block; margin-bottom: 20px; font-weight: bold; }
+    a.back:hover { text-decoration: underline; }
+    
+    h1 { color: #00ff88; font-size: 1.6em; margin-bottom: 8px; line-height: 1.3; }
+    .meta { font-size: 0.82em; opacity: 0.6; margin-bottom: 25px; border-bottom: 1px solid rgba(0,255,136,0.2); padding-bottom: 12px; }
+    
+    h2 { color: #00ff88; font-size: 1.15em; margin: 25px 0 10px 0; border-left: 3px solid #00ff88; padding-left: 10px; }
+    p { margin-bottom: 12px; font-size: 0.9em; opacity: 0.9; }
+    
+    .cmd-box {
+      background: rgba(15, 23, 20, 0.9);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin: 10px 0 18px 0;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.85em;
+      color: #00ff88;
+      overflow-x: auto;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    }
+    .comment { color: #666; display: block; margin-bottom: 4px; }
+    ul { margin-left: 20px; margin-bottom: 15px; font-size: 0.9em; opacity: 0.9; }
+    li { margin-bottom: 6px; }
+    .note { background: rgba(0, 255, 136, 0.08); border: 1px solid rgba(0, 255, 136, 0.2); padding: 12px; border-radius: 8px; font-size: 0.85em; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="./" class="back">&larr; Kembali ke Daftar Blog</a>
+    
+    <h1>Panduan Instalasi SAST & DAST Security Scanner (Termux, Ubuntu, Linux)</h1>
+    <div class="meta">2026-07-26 • Tool Documentation • Oleh Sdeveandteam</div>
+
+    <p>Berikut adalah panduan langkah demi langkah cara menginstal dan menjalankan <b>SAST & DAST Security Scanner dengan AI Explainer</b> di berbagai lingkungan CLI, baik <b>Termux (Android)</b>, <b>Ubuntu</b>, maupun <b>Distro Linux lainnya</b>.</p>
+
+    <h2>1. Persyaratan Sistem (Prerequisites)</h2>
+    <p>Pastikan sistem kamu sudah memiliki Git dan Python 3 terinstal:</p>
+    <ul>
+      <li>Python version 3.8+</li>
+      <li>Git CLI</li>
+      <li>Koneksi internet untuk mengunduh dependency</li>
+    </ul>
+
+    <h2>2. Cara Install di Termux (Android)</h2>
+    <p>Buka aplikasi Termux lalu jalankan perintah berikut secara berurutan:</p>
+    <div class="cmd-box">
+      <span class="comment"># Update package list & install depedency dasar</span>
+      pkg update && pkg upgrade -y<br>
+      pkg install git python clang make -y<br><br>
+      <span class="comment"># Clone repository scanner</span>
+      git clone https://github.com/Sdeveandteam/sdev-toolkit.git<br>
+      cd sdev-toolkit<br><br>
+      <span class="comment"># Install module python yang dibutuhkan</span>
+      pip install -r requirements.txt
+    </div>
+
+    <h2>3. Cara Install di Ubuntu / Debian / Arch Linux</h2>
+    <p>Untuk pengguna Linux PC atau Server (VPS):</p>
+    <div class="cmd-box">
+      <span class="comment"># Install git & python3-pip (Ubuntu/Debian)</span>
+      sudo apt update && sudo apt install git python3 python3-pip -y<br><br>
+      <span class="comment"># Clone repository</span>
+      git clone https://github.com/Sdeveandteam/sdev-toolkit.git<br>
+      cd sdev-toolkit<br><br>
+      <span class="comment"># Install requirements</span>
+      pip3 install -r requirements.txt
+    </div>
+
+    <h2>4. Cara Menjalankan Tool</h2>
+    <p>Setelah instalasi selesai, kamu bisa langsung menjalankan scanning dengan perintah berikut:</p>
+    <div class="cmd-box">
+      <span class="comment"># Scan Source Code / Repository (SAST Mode)</span>
+      python main.py --mode sast --path /path/to/your/code<br><br>
+      <span class="comment"># Scan Web/URL Berjalan (DAST Mode)</span>
+      python main.py --mode dast --url https://target-site.com<br><br>
+      <span class="comment"># Jalankan dengan AI Explainer</span>
+      python main.py --mode sast --path . --ai-explain
+    </div>
+
+    <div class="note">
+      💡 <b>Tips Termux:</b> Jika mengalami error saat instalasi module <code>pip</code>, pastikan kamu sudah menjalankan <code>pkg install clang make</code> terlebih dahulu di Termux.
+    </div>
+
+  </div>
+</body>
+</html>

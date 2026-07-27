@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DoS Stress Test Lab | Sdeveandteam</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #050505; color: #e0e0e0; padding: 30px 15px; line-height: 1.6; }
+    .container { max-width: 750px; margin: 0 auto; }
+    a.back { color: #00ff88; text-decoration: none; font-size: 0.9em; display: inline-block; margin-bottom: 20px; font-weight: bold; }
+    h1 { color: #00ff88; font-size: 1.6em; margin-bottom: 8px; line-height: 1.3; }
+    .meta { font-size: 0.82em; opacity: 0.6; margin-bottom: 25px; border-bottom: 1px solid rgba(0,255,136,0.2); padding-bottom: 12px; }
+    h2 { color: #00ff88; font-size: 1.15em; margin: 25px 0 10px 0; border-left: 3px solid #00ff88; padding-left: 10px; }
+    p { margin-bottom: 12px; font-size: 0.9em; opacity: 0.9; }
+    .cmd-box { background: rgba(15, 23, 20, 0.9); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 8px; padding: 12px 15px; margin: 10px 0 18px 0; font-family: 'Consolas', monospace; font-size: 0.85em; color: #00ff88; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="./" class="back">&larr; Kembali ke Daftar Blog</a>
+    <h1>DoS Lab: Stress Testing & Mitigation Analysis</h1>
+    <div class="meta">2026-07-27 • Security Lab • Oleh Sdeveandteam</div>
+
+    <p><b>DoS Lab</b> dirancang sebagai lingkungan pengujian lokal (controlled environment) untuk mengukur daya tahan server web terhadap lonjakan trafik tinggi serta menguji efektivitas aturan rate-limiting & Web Application Firewall (WAF).</p>
+
+    <h2>Menjalankan Simulation</h2>
+    <div class="cmd-box">
+      git clone https://github.com/Sdeveandteam/dos-lab.git<br>
+      cd dos-lab<br>
+      python3 test_stress.py --target http://localhost:8080 --rate 1000
+    </div>
+  </div>
+</body>
+</html>

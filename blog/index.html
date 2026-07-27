@@ -1,59 +1,85 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog & Research | Sdeveandteam</title>
-<link rel="icon" href="https://sembdev.my.id/favicon.png" type="image/png">
-<style>
-  * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
-  body { background: #050505; color: white; padding: 40px 15px; }
-  .container { max-width: 800px; margin: 0 auto; }
-  .nav-back { margin-bottom: 25px; }
-  .nav-back a { color: #00ff88; text-decoration: none; font-size: 0.9em; font-weight: bold; }
-  .nav-back a:hover { text-decoration: underline; }
-  h1 { color: #00ff88; margin-bottom: 10px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.4); }
-  p.desc { font-size: 0.9em; opacity: 0.8; margin-bottom: 30px; }
-  
-  /* List Artikel */
-  .post-list { display: flex; flex-direction: column; gap: 15px; }
-  .post-card {
-    background: rgba(15, 23, 20, 0.5);
-    border: 1px solid rgba(0, 255, 136, 0.2);
-    padding: 20px;
-    border-radius: 12px;
-    text-decoration: none;
-    color: white;
-    transition: 0.3s;
-    display: block;
-  }
-  .post-card:hover {
-    transform: translateY(-3px);
-    border-color: #00ff88;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
-  }
-  .post-date { font-size: 0.75em; color: #00ff88; margin-bottom: 5px; opacity: 0.8; }
-  .post-title { font-size: 1.1em; margin-bottom: 8px; color: #fff; font-weight: bold; }
-  .post-excerpt { font-size: 0.85em; opacity: 0.8; line-height: 1.4; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Security Research | Sdeveandteam</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background: #050505; color: white; padding: 40px 15px; }
+    
+    .container { max-width: 800px; margin: 0 auto; }
+    
+    a.back { color: #00ff88; text-decoration: none; font-size: 0.88em; font-weight: bold; display: inline-block; margin-bottom: 20px; }
+    a.back:hover { text-decoration: underline; }
+    
+    h1 { color: #00ff88; font-size: 1.8em; margin-bottom: 8px; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
+    .subtitle { font-size: 0.9em; opacity: 0.75; margin-bottom: 30px; line-height: 1.5; }
+    
+    /* Grid Artikel */
+    .blog-grid { display: grid; gap: 16px; }
+    
+    .blog-card {
+      background: rgba(15, 23, 20, 0.5);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      padding: 18px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-3px);
+      border-color: #00ff88;
+      background: rgba(0, 255, 136, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 255, 136, 0.25);
+    }
+    
+    .tag-date { font-size: 0.78em; color: #00ff88; font-weight: bold; margin-bottom: 6px; }
+    .blog-card h3 { font-size: 1.05em; margin-bottom: 8px; color: #fff; }
+    .blog-card p { font-size: 0.82em; opacity: 0.8; line-height: 1.45; }
+  </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="nav-back">
-    <a href="https://sembdev.my.id">← Kembali ke Portofolio</a>
-  </div>
-
+  <a href="../" class="back">&larr; Kembali ke Portofolio</a>
+  
   <h1>Blog & Security Research</h1>
-  <p class="desc">Catatan teknis, write-up pengujian celah keamanan, dan dokumentasi riset otomatisasi.</p>
+  <p class="subtitle">Dokumentasi tools, write-up pengujian celah keamanan, dan riset otomatisasi buatan Sdeveandteam.</p>
 
-  <div class="post-list">
-    <!-- Artikel 1 -->
-    <a href="sample-post.html" class="post-card">
-      <div class="post-date">2026-07-26 • Pentest Write-up</div>
-      <div class="post-title">Pengenalan SAST & DAST Security Scanner dengan AI Explainer</div>
-      <div class="post-excerpt">Pembahasan singkat alur pengujian otomatis kode (SAST) dan aplikasi berjalan (DAST) menggunakan modul custom buatan...</div>
+  <div class="blog-grid">
+
+    <!-- ARTIKEL 1 -->
+    <a href="sast-dast.html" class="blog-card">
+      <div class="tag-date">2026-07-26 • Tool Installation</div>
+      <h3>Panduan Install SAST & DAST Security Scanner</h3>
+      <p>Panduan langkah demi langkah cara instalasi dan penggunaan Sdev-Toolkit scanner untuk Termux, Ubuntu, dan Linux CLI...</p>
     </a>
+
+    <!-- ARTIKEL 2 -->
+    <a href="burpsuite-ai.html" class="blog-card">
+      <div class="tag-date">2026-07-27 • Pentest Write-up</div>
+      <h3>BurpSuite AI Scanner: Integrasi LLM untuk Analysis Exploit</h3>
+      <p>Mengintegrasikan AI agent ke dalam BurpSuite untuk mempercepat analisa vulnerability dan triage payload secara otomatis...</p>
+    </a>
+
+    <!-- ARTIKEL 3 -->
+    <a href="fuzzer-go-rust.html" class="blog-card">
+      <div class="tag-date">2026-07-27 • Research</div>
+      <h3>High-Speed Fuzzing: Benchmark Go-Fuzzer vs Rust-Fuzzer</h3>
+      <p>Analisis komparasi performa, konsumsi memori, dan kecepatan HTTP request fuzzing menggunakan bahasa Go dan Rust...</p>
+    </a>
+
+    <!-- ARTIKEL 4 -->
+    <a href="supply-chain.html" class="blog-card">
+      <div class="tag-date">2026-07-27 • Security PoC</div>
+      <h3>Anatomi Supply Chain Attack pada Package Repository</h3>
+      <p>Proof of concept riset keamanan terkait vektor serangan manipulasi dependency package dan strategi mitigasinya...</p>
+    </a>
+
   </div>
 </div>
 

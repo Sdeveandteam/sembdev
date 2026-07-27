@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog & Security Research | Sdeveandteam</title>
   
-  <!-- Open Graph Meta Tags (Untuk Preview WA/Telegram/LinkedIn) -->
+  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Blog & Security Research - Sdeveandteam">
   <meta property="og:description" content="Dokumentasi tools cybersecurity, write-up pengujian celah keamanan, dan riset otomatisasi.">
   <meta property="og:type" content="website">
@@ -19,7 +19,7 @@
     h1 { color: #00ff88; font-size: 1.8em; margin-bottom: 8px; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
     .subtitle { font-size: 0.9em; opacity: 0.75; margin-bottom: 20px; line-height: 1.5; }
 
-    /* CSS & Animasi Gambar Repo (AOS-style) */
+    /* CSS & Animasi Gambar Repo */
     .repo-banner {
       width: 100%;
       border-radius: 12px;
@@ -27,24 +27,11 @@
       margin-bottom: 30px;
       box-shadow: 0 4px 20px rgba(0, 255, 136, 0.2);
       display: block;
-      /* Pengaturan Animasi */
       animation: aosFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       opacity: 0;
     }
 
-    /* Keyframes Animasi Slide-Up & Fade-In */
-    @keyframes aosFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(35px) scale(0.97);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    /* Search & Filter Section */
+    /* Controls (Search & Filter) */
     .controls { margin-bottom: 25px; display: flex; flex-direction: column; gap: 12px; }
     .search-input {
       width: 100%;
@@ -95,6 +82,67 @@
     .tag-date { font-size: 0.78em; color: #00ff88; font-weight: bold; margin-bottom: 6px; }
     .blog-card h3 { font-size: 1.05em; margin-bottom: 8px; color: #fff; }
     .blog-card p { font-size: 0.82em; opacity: 0.8; line-height: 1.45; }
+
+    /* Layout Khusus Artikel Bertingkat & Galeri Gambar */
+    .featured-card {
+      background: rgba(15, 23, 20, 0.75);
+      border: 1px solid rgba(0, 255, 136, 0.4);
+    }
+    .featured-card h2 {
+      font-size: 1.25em;
+      color: #00ff88;
+      margin: 10px 0 15px 0;
+    }
+    .proof-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin: 20px 0 10px 0;
+    }
+    @media (min-width: 600px) {
+      .proof-gallery { grid-template-columns: 1fr 1fr; }
+    }
+    .proof-item {
+      background: rgba(5, 5, 5, 0.6);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .proof-img {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: block;
+    }
+    .proof-caption {
+      font-size: 0.78em;
+      color: #d0d0d0;
+      line-height: 1.4;
+    }
+    .proof-caption strong {
+      color: #00ff88;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    /* Animasi Scroll AOS Effect */
+    .aos-effect {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .aos-effect.aos-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @keyframes aosFadeUp {
+      from { opacity: 0; transform: translateY(35px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
   </style>
 </head>
 <body>
@@ -105,12 +153,12 @@
   <h1>Blog & Security Research</h1>
   <p class="subtitle">Dokumentasi tools, write-up pengujian celah keamanan, dan riset otomatisasi buatan Sdeveandteam.</p>
 
-  <!-- GAMBAR BUKTI REPO DENGAN ANIMASI AOS -->
+  <!-- GAMBAR BUKTI REPO -->
   <img src="repo.jpg" alt="Bukti Repositori Sdeveandteam" class="repo-banner">
 
   <!-- Filter & Search Bar -->
   <div class="controls">
-    <input type="text" id="searchInput" class="search-input" placeholder="Cari artikel atau kata kunci (misal: Fuzzing, AI, Bot)..." onkeyup="filterPosts()">
+    <input type="text" id="searchInput" class="search-input" placeholder="Cari artikel atau kata kunci (misal: Audit, Fuzzing, Pentest)..." onkeyup="filterPosts()">
     <div class="filter-tags">
       <button class="tag-btn active" onclick="filterCategory('all', this)">Semua</button>
       <button class="tag-btn" onclick="filterCategory('tools', this)">Tools</button>
@@ -122,6 +170,51 @@
 
   <div class="blog-grid" id="blogGrid">
 
+    <!-- ARTIKEL UTAMA DENGAN 4 GAMBAR AUDIT & ANIMASI AOS -->
+    <div class="blog-card featured-card" data-category="pentest">
+      <div class="tag-date">2026-07-27 • Security Audit & Resilience Report</div>
+      <h2>Laporan Pengujian Keamanan Web & Ketahanan Infrastruktur</h2>
+      <p>Dokumentasi pengujian komprehensif pada server target mencakup analisis HTTP security headers, pengujian parameter, simulasi beban trafik tinggi, serta evaluasi mitigasi Edge Protection.</p>
+      
+      <!-- Galeri 4 Gambar Bukti Pengujian -->
+      <div class="proof-gallery">
+        
+        <div class="proof-item aos-effect">
+          <img src="tes1.jpg" alt="Security Headers Analysis" class="proof-img">
+          <div class="proof-caption">
+            <strong>1. Security Headers Assessment</strong>
+            Pengujian konfigurasi HTTP headers & pemindaian celah parameter via <i>MiniWebScan v1.2</i>. Mendapatkan skor keamanan <strong>83/100</strong>.
+          </div>
+        </div>
+
+        <div class="proof-item aos-effect">
+          <img src="tes2.jpg" alt="DoS & Load Testing" class="proof-img">
+          <div class="proof-caption">
+            <strong>2. Traffic Load & Stress Testing</strong>
+            Simulasi lonjakan trafik berkecepatan tinggi (50–80 RPS) via <i>sdev-dos-lab</i> untuk mengukur stabilitas dan latensi respon server asal.
+          </div>
+        </div>
+
+        <div class="proof-item aos-effect">
+          <img src="tes3.jpg" alt="Traffic Overview" class="proof-img">
+          <div class="proof-caption">
+            <strong>3. Edge Protection Traffic Analytics</strong>
+            Analisis metrik trafik pada sistem keamanan layer depan. Terdeteksi total 6.93k request dengan efektivitas pemblokiran otomatis sebesar <strong>7.75%</strong>.
+          </div>
+        </div>
+
+        <div class="proof-item aos-effect">
+          <img src="tes4.jpg" alt="Security Action Items" class="proof-img">
+          <div class="proof-caption">
+            <strong>4. Hardening & Security Insights</strong>
+            Hasil evaluasi postur keamanan jaringan untuk rekomendasi perbaikan, termasuk penyelarasan DNS Proxy dan penyaringan otomatis trafik bot.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ARTIKEL LAINNYA -->
     <a href="sast-dast.html" class="blog-card" data-category="tools">
       <div class="tag-date">2026-07-26 • Tool Installation</div>
       <h3>Panduan Install SAST & DAST Security Scanner</h3>
@@ -207,6 +300,31 @@
     btn.classList.add('active');
     filterPosts();
   }
+
+  /* Intersection Observer untuk Efek Animasi AOS saat Gambar Muncul di Screen */
+  document.addEventListener("DOMContentLoaded", function() {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Efek delay bertingkat (staggered animation) untuk tiap gambar
+          setTimeout(() => {
+            entry.target.classList.add('aos-active');
+          }, index * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.aos-effect').forEach(el => {
+      observer.observe(el);
+    });
+  });
 </script>
 
 </body>

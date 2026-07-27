@@ -1,0 +1,7 @@
+# Sdeveandteam Security Contact Information
+Contact: mailto:sembsui@gmail.com
+Contact: https://github.com/Sdeveandteam
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: id, en
+Canonical: https://sembdev.my.id/.well-known/security.txt
+Policy: https://github.com/Sdeveandteam

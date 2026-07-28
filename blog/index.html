@@ -158,7 +158,7 @@
 
   <!-- Filter & Search Bar -->
   <div class="controls">
-    <input type="text" id="searchInput" class="search-input" placeholder="Cari artikel atau kata kunci (misal: Audit, Fuzzing, Pentest)..." onkeyup="filterPosts()">
+    <input type="text" id="searchInput" class="search-input" placeholder="Cari artikel atau kata kunci (misal: Clickjacking, Audit, Pentest)..." onkeyup="filterPosts()">
     <div class="filter-tags">
       <button class="tag-btn active" onclick="filterCategory('all', this)">Semua</button>
       <button class="tag-btn" onclick="filterCategory('tools', this)">Tools</button>
@@ -170,7 +170,35 @@
 
   <div class="blog-grid" id="blogGrid">
 
-    <!-- ARTIKEL UTAMA DENGAN 4 GAMBAR AUDIT & ANIMASI AOS -->
+    <!-- ARTIKEL 1: CLICKJACKING ASSESSMENT (TES5 & TES6) -->
+    <div class="blog-card featured-card" data-category="pentest">
+      <div class="tag-date">2026-07-28 • Security Verification Write-up</div>
+      <h2>Clickjacking Defense & Frame Embedding Verification</h2>
+      <p>Pengujian ketahanan UI Redressing (Clickjacking) pada domain target untuk memverifikasi efektivitas pembatasan frame pada Edge Server.</p>
+      
+      <!-- Galeri 2 Gambar Bukti (tes5.jpg & tes6.jpg) -->
+      <div class="proof-gallery">
+        
+        <div class="proof-item aos-effect">
+          <img src="tes5.jpg" alt="Clickjacking Test Frame Blocking" class="proof-img">
+          <div class="proof-caption">
+            <strong>1. Frame Embedding Simulation (PASS)</strong>
+            Simulasi pemuatan halaman target ke dalam elemen <code>&lt;iframe&gt;</code> eksternal. Browser secara otomatis menolak pemuatan dan menampilkan status koneksi diblokir.
+          </div>
+        </div>
+
+        <div class="proof-item aos-effect">
+          <img src="tes6.jpg" alt="Clickjacking Verification Result" class="proof-img">
+          <div class="proof-caption">
+            <strong>2. Header Validation & Security Status</strong>
+            Hasil verifikasi mengonfirmasi bahwa header <code>X-Frame-Options: DENY</code> dan <code>Content-Security-Policy (frame-ancestors)</code> aktif penuh untuk mencegah serangan overlay.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ARTIKEL 2: WEB AUDIT & RESILIENCE (TES1 - TES4) -->
     <div class="blog-card featured-card" data-category="pentest">
       <div class="tag-date">2026-07-27 • Security Audit & Resilience Report</div>
       <h2>Laporan Pengujian Keamanan Web & Ketahanan Infrastruktur</h2>
@@ -312,7 +340,6 @@
     const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          // Efek delay bertingkat (staggered animation) untuk tiap gambar
           setTimeout(() => {
             entry.target.classList.add('aos-active');
           }, index * 120);
